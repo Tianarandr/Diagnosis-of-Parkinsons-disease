@@ -36,34 +36,58 @@ Les capteurs sont placés sous chaque pied du sujet, mesurant la force de réact
 
 ## 4. Méthodes utilisées
 
-### Machine Learning Classique
+### Apprentissage Classique
 
-Nous avons utilisé plusieurs algorithmes classiques de classification pour effectuer la tâche, tels que :
-- Naïve Bayes
-- Decision Tree
-- K-Nearest Neighbors (KNN)
-  
-Les performances de ces méthodes sont satisfaisantes avec des résultats allant jusqu'à 98% de précision, mais elles nécessitent un prétraitement manuel des données pour extraire des caractéristiques pertinentes.
+Pour cette partie, nous avons choisi les modèles suivants :
+- **Naïve Bayes (NB)** : Utilisation d’une distribution normale pour les trois sous-ensembles de données.
+- **Arbres de décision (DT)** : L'algorithme CART est utilisé avec l'indice de Gini pour trouver la meilleure construction et la meilleure partition de l'arbre.
+- **Forêts aléatoires (RF)** : Le nombre optimal d'arbres pour les trois sous-ensembles de données est fixé à 100.
+- **Support Machines vectorielles (SVM)** : Modèle non linéaire avec noyau « rbf ».
+- **Modèles de mélange gaussien (GMM)** : Nombre de classes fixé à 2 (parkinsonien et sain).
+- **K-means** : Le seul paramètre à régler est le nombre de classes, qui est fixé à deux (sains ou malades).
+- **KNN (K-Nearest Neighbors)** : Utilisation de la distance euclidienne, avec un nombre de voisins fixé à 3.
 
-### Réseaux de Neurones Convolutifs (CNN)
+### Apprentissage Profond
 
-Afin de simplifier le processus et automatiser l'extraction des caractéristiques, nous avons implémenté un modèle basé sur un réseau de neurones convolutifs. Cette méthode, couramment utilisée dans la vision par ordinateur, a permis d'obtenir des résultats prometteurs, même avec une architecture simple et un jeu de données réduit. Cependant, des améliorations sont encore possibles, notamment en appliquant la méthode de fine-tuning pour affiner le modèle.
+Voici un tableau récapitulatif des résultats obtenus pour la partie d’apprentissage profond avec les différentes architectures testées :
 
-## 5. Résultats
+| Modèle                        | Frenkel Toledo et al | Galit Yogev et al | Hausdoff et al | Accuracy (%) | Loss (%) |
+|-------------------------------|----------------------|-------------------|----------------|--------------|----------|
+| **Perceptrons multicouches**   | 80                   | 75                | 83.3           | 36           | 44       | 31 |
+| **CNN (Convolutional Neural Network)**  | 86.6                 | 82.1              | 87.0           | 27           | 36       | 25.96    |
+| **FCN (Fully Convolutional Network)**   | 91                   | 86.3              | 80             | 13           | 21       | 33       |
+| **ResNet**                     | 93.3                 | 81                | 89.85          | 9.8          | 15.9     | 21.7     |
 
-Les résultats préliminaires montrent que les méthodes classiques de Machine Learning offrent des performances acceptables, mais l'utilisation des réseaux de neurones convolutifs permet de simplifier le processus et de potentiellement améliorer les résultats. Des améliorations supplémentaires sont à prévoir pour obtenir une meilleure précision, notamment avec plus de données et en optimisant les paramètres du modèle CNN.
+**Tableau 2 : Résultats des modèles d’apprentissage automatique profond**
+
+## 5. Performance des modèles
+
+### Modèles supervisés vs non supervisés
+
+Voici un tableau détaillant les performances des différents modèles utilisés dans l'apprentissage supervisé et non supervisé, en termes de précision, rappel, F-mesure et écart type (STD) :
+
+| Modèle      | Accuracy (%) | STD (%) | Précision (%) | Recall (%) | F-Measure (%) |
+|-------------|--------------|---------|---------------|------------|---------------|
+| **KNN**     | 94.7         | 2.61    | 86.13         | 71.72      | 81.38         |
+| **SVM**     | 86.61        | 3.49    | 83.74         | 67.91      | 79.33         |
+| **RF**      | 89.27        | 5.61    | 86.64         | 61.97      | 73.38         |
+| **DT**      | 84.86        | 3.83    | 77.99         | 57.30      | 66.71         |
+| **NB**      | 80.21        | 4.60    | 75.68         | 64.43      | 68.90         |
+| **GMM**     | 70.13        | 5.61    | 37.14         | 27.80      | 29.94         |
+| **K-Means** | 65.34        | 3.83    | 38.17         | 49.91      | 30.19         |
+
+**Tableau 3 : Performance des modèles supervisés et non supervisés**
 
 ## 6. Conclusion
 
-Dans ce projet, nous avons exploré différentes approches pour diagnostiquer la maladie de Parkinson à partir de données de marche collectées à l'aide de capteurs. Nous avons montré qu'il est possible de classer les sujets en deux classes : parkinsonien et sain, avec une précision élevée grâce à des méthodes classiques de Machine Learning. L'utilisation des réseaux de neurones convolutifs permet d'automatiser l'extraction des caractéristiques et d'obtenir des résultats compétitifs avec des ressources limitées.
-
-Cependant, des efforts supplémentaires sont nécessaires pour optimiser les modèles et améliorer la précision des classifications, en particulier en utilisant des techniques avancées comme le fine-tuning.
+Les résultats montrent que les modèles supervisés, comme KNN, SVM et RF, offrent des performances de classification nettement supérieures par rapport aux modèles non supervisés tels que GMM et K-Means. En particulier, KNN et SVM atteignent les meilleures performances en termes d'accuracy, précision et F-mesure. Les modèles non supervisés, bien qu'intéressants pour l'exploration des données, semblent moins performants pour cette tâche de classification spécifique.
 
 ## 7. Installation
 
 ### Prérequis
 - Python 3.x
 - Bibliothèques nécessaires : `numpy`, `pandas`, `scikit-learn`, `tensorflow`, `keras`, `matplotlib`
+
 
 ### Installation
 1. Clonez le repository :
